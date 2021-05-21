@@ -1,0 +1,56 @@
+<h1 style="text-align: center;">welcome you to the employee details </h1>
+<div style="display: flex;">
+  <div class="col-6" style="text-align: center;margin: auto;">
+<button (click)="addEmployee()" class ="btn btn-info" >Add Employee</button>&nbsp;
+<button (click)="getEmployee()" class ="btn btn-success">Get All Employee</button><br>
+</div>
+</div>
+<div class ="col col-mg-5" [style.display]="EmployeesDisplay">
+  <input type="text" class="search" #item placeholder="Enter Keyword to search" (keyup)="searchEmployee(item.value)">
+<!-- <select class ="select" #data [(ngModel)]="select" (change)="sort(data.value)" (blur)="sort(data.value)">
+  <option value="">Sort By</option>
+  <option value="sno">S.No.</option>
+  <option value="name">Name</option>
+  <option value="phone">Phone Number</option>
+  <option value="email">Email id</option>
+</select> -->
+  <table  class="table table-striped">
+    <thead>
+    <tr id="head">
+      <th scope="col"  (click)="onsort($event)" name="sno">S.No&nbsp;<i class="dataa"></i></th>
+      <th scope="col"  (click)="onsort($event)" name="name">Employee Name&nbsp;<i class="dataa"></i></th>
+      <th scope="col"  (click)="onsort($event)" name="email">Email id&nbsp;<i class="dataa"></i></th>
+      <th scope="col"  (click)="onsort($event)" name="phone">Phone No.&nbsp;<i class="dataa"></i></th>
+      <th scope="col" >Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let employee of employeesdata">
+      <td scope="row" style="font-weight: bolder;">{{ employee.id }}</td>
+      <td>
+        {{ employee.First_Name }}
+      </td>
+      <td>{{ employee.Email}}</td>
+      <td>{{ employee.Phone_No  }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="getDetails(employee)">Get Details</button>&nbsp;
+        <button class="btn btn-danger" (click)="delete(employee.EmpId)">Delete Record</button>&nbsp;
+        <button class="btn btn-info" (click)="editinfo(employee)">Edit Record</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshEmployee()">
+    </ngb-pagination>
+  
+  </div>
+</div>
+<!-- add/edit Employee form section -->
+<div class ="col col-mg-5" [style.display]="display">
+  <app-form [data]="empdata" (submit)="onsubmit($event)"></app-form>
+</div>
+  <div [style.display]="displayEmployeeInfo">
+    <app-employee-details [data]="displayDetails"></app-employee-details>
+  </div>

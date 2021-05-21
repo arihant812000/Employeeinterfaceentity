@@ -1,0 +1,129 @@
+
+
+    <form [formGroup]="form"  (ngSubmit)="onsubmit();form.reset()">
+      <fieldset style="width:auto;border: 2px solid black;">
+        <legend style="width:fit-content;text-align: center;">Personal details</legend>
+        <div class="form-group" style="text-align: center;align-items: center;">
+        
+          <input  type="hidden" formControlName="EmpId" class="form-control col-sm-6" name="id" >
+          
+        </div>
+      <div class="form-group" style="text-align: center;align-items: center;">
+        <label class="col-sm-4 col-form-label"> First Name</label>
+        <input  type="text" formControlName="First_Name" maxlength="20" class="form-control col-sm-6" name="First_name"  placeholder="Enter first name" id="First_Name" pattern="[a-zA-Z]+$"><br>
+      
+        <span *ngIf="form.get('First_Name').invalid&& form.get('First_Name').touched" class="text-danger"> **Enter valid first name</span>
+      </div>
+      <div class="form-group" style="text-align: center;align-items: center;">
+        <label class="col-sm-4 col-form-label">Last Name</label>
+        <input  pattern="[a-zA-Z]+$" type="text" formControlName="Last_Name"  class="form-control col-sm-6" name="Last_name" placeholder="Enter Last name" ><br>
+        <span *ngIf="form.get('Last_Name').invalid&& form.get('Last_Name').touched" class="text-danger"> **Enter valid last name</span>
+      </div>
+      <div class="form-group" style="text-align: center;align-items: center;">
+        <label class="col-sm-4 col-form-label"> Date of Birth</label>
+        <input  type="date" formControlName="Date_of_Birth" [max]="maxDate" [min]="minDate" class="form-control col-sm-6" name="Date_of_Birth" placeholder="select Date of Birth" #dob (blur)="getAge(dob.value)"><br>
+        <span *ngIf="form.get('Date_of_Birth').invalid&& form.get('Date_of_Birth').touched" class="text-danger"> **this is required feild</span>
+      </div>
+      <div class="form-group" style="text-align: center;align-items: center;">
+        <label class="col-sm-4 col-form-label">Age</label>
+        <input readonly type="number" formControlName="Age"  class="form-control col-sm-6" name="Age" [value]="AgeEmp">
+      </div>
+      <div class="form-group" style="text-align: center;align-items: center;">
+        <label class="col-sm-4 col-form-label"> Email</label>
+        <input  type="email" email formControlName="Email"  class="form-control col-sm-6" name="email" placeholder="Enter email"><br>
+        <span *ngIf="form.get('Email').invalid&& form.get('Email').touched" class="text-danger"> **Enter The Correct MailId</span>
+      </div>
+      <div class="form-group" style="text-align: center;align-items: center;">
+        <label class="col-sm-4 col-form-label">Phone number</label>
+        <input  type="tel" formControlName="Phone_No"  class="form-control col-sm-6" name="Phone_number" placeholder="Enter phone number" pattern="[789][0-9]{9}" ><br>
+        <span *ngIf="form.get('Phone_No').invalid&& form.get('Phone_No').touched" class="text-danger"> **Enter The Correct Phone number</span>
+      </div>
+      <div class="form-group" style="text-align: center;align-items: center;">
+        <label class="col-sm-4 col-form-label"> Department</label>
+       <select   formControlName="Department"   class="form-control col-sm-6">
+        <option value="">Select The Department</option>
+    <option value="Production">Production</option>
+    <option value="Research and Development">Research and Development</option>
+    <option value="Purchasing">Purchasing</option>
+    <option value="Marketing">Marketing</option>
+    <option value="Human Resource Management">Human Resource Management</option>
+    <option value="Acounting and Finance">Acounting and Finance</option>
+       </select><br>
+       <span *ngIf="form.get('Department').invalid&& form.get('Department').touched" class="text-danger"> **this is required feild</span>
+        
+       </div>
+       <div class="form-group" style="text-align: center;align-items: center;">
+        <label class="col-sm-4 col-form-label"> Job Role</label>
+        <input  pattern="[a-zA-Z ]+$" type="text" formControlName="Job_Role"  class="form-control col-sm-6" name="Job_Role" placeholder="Enter Job role"><br>
+        <span *ngIf="form.get('Job_Role').invalid&& form.get('Job_Role').touched" class="text-danger"> **Enter valid Job Role</span>
+        
+      </div>
+    
+      </fieldset>
+      <!-- Address -->
+      <fieldset style="width:auto;border: 2px solid black;" formArrayName="EmployeeAddresses" *ngFor="let item of addressList['controls'];let i = index;">
+        <legend style="width:fit-content;text-align: center;">Address</legend>
+        <div [formGroupName]="i">
+
+          <div class="form-group" style="text-align: center;align-items: center;">
+            <label class="col-sm-4 col-form-label"> Address</label>
+           <select    formControlName="Addresstype"  class="form-control col-sm-6">
+            <option value="">Select The Type of Address</option>
+        <option value="Permanent">Permanent</option>
+        <option value="Office">Office</option>
+        <option value="Current">Current</option>
+        <option value="Others">Others</option>
+        
+           </select><br>
+           <span *ngIf="item.controls.Addresstype.invalid&& item.controls.Addresstype.touched" class="text-danger"> **this is required feild</span>
+           </div>
+          <div *ngIf="item.controls.Addresstype.value == 'Others'" class="form-group"  style="text-align: center;align-items: center;">
+            <label class="col-sm-4 col-form-label">Address Type</label>
+            <input  pattern="[a-zA-Z]+$" type="text" required formControlName="Address_type" class="form-control col-sm-6" name="Address_type" placeholder="Enter Address type">
+            <br>
+            <span *ngIf="item.controls.Address_type.invalid&& item.controls.Address_type.touched" class="text-danger"> **this is required feild</span>
+          </div>
+
+        <div class="form-group" style="text-align: center;align-items: center;">
+          <label class="col-sm-4 col-form-label">House Number</label>
+          <input  type="text" formControlName="House_number" class="form-control col-sm-6" name="P_House_number" placeholder="Enter House number"><br>
+          <span *ngIf="item.controls.House_number.invalid&& item.controls.House_number.touched" class="text-danger"> **this is required feild</span>
+        </div>
+        <div class="form-group" style="text-align: center;align-items: center;">
+          <label class="col-sm-4 col-form-label">Street</label>
+          <input  type="text" formControlName="Street" class="form-control col-sm-6" name="P_Street" placeholder="Enter street name" ><br>
+          <span *ngIf="item.controls.Street.invalid&& item.controls.Street.touched" class="text-danger"> **this is required feild</span>
+        </div>
+        <div class="form-group" style="text-align: center;align-items: center;">
+          <label class="col-sm-4 col-form-label">city</label>
+          <input  pattern="[a-zA-Z]+$" type="text" formControlName="City" class="form-control col-sm-6" name="P_City" placeholder="Enter city"><br>
+          <span *ngIf="item.controls.City.invalid&& item.controls.City.touched" class="text-danger"> **Enter valid city name</span>
+        </div>
+        <div class="form-group" style="text-align: center;align-items: center;">
+          <label class="col-sm-4 col-form-label">State</label>
+          <input  pattern="[a-zA-Z]+$" type="text" formControlName="State" class="form-control col-sm-6" name="P_State" placeholder="Enter State" ><br>
+          <span *ngIf="item.controls.State.invalid&& item.controls.State.touched" class="text-danger"> **Enter valid state</span>
+        </div>
+        <div class="form-group" style="text-align: center;align-items: center;">
+          <label class="col-sm-4 col-form-label">country</label>
+          <input pattern="[a-zA-Z]+$" type="text" formControlName="Country" class="form-control col-sm-6" name="P_Country" placeholder="Enter Country"><br>
+          <span *ngIf="item.controls.Country.invalid&& item.controls.Country.touched" class="text-danger"> **Enter valid country name</span>
+        </div>
+        <div class="form-group" style="text-align: center;align-items: center;">
+          <label class="col-sm-4 col-form-label">Pincode</label>
+          <input  type="text" formControlName="Pin_Code" class="form-control col-sm-6" name="P_Pincode" placeholder="Enter pincode" ><br>
+          <span *ngIf="item.controls.Pin_Code.invalid&& item.controls.Pin_Code.touched" class="text-danger"> **this is required feild</span>
+        </div>
+        <div class="form-group" style="text-align: center;align-items: center;">
+          <label class="col-sm-4 col-form-label">Landmark</label>
+          <input  type="text" formControlName="Landmark" class="form-control col-sm-6" name="P_Landmark" placeholder="Enter Landmark"><br>
+          <span *ngIf="item.controls.Landmark.invalid&& item.controls.Landmark.touched" class="text-danger"> **this is required feild</span>
+        </div>
+        <button type="button" (click)="removeAddress(i)" class="btn btn-danger" style="margin: auto;display: block;">remove Address</button>
+        </div>
+        </fieldset>
+        <button type="button" (click)="addAddress()" class="btn btn-success">Add Address type</button>&nbsp;
+          <button [disabled]="form.invalid" type="submit" class="btn btn-primary">
+            Submit
+    </button>    
+      </form>

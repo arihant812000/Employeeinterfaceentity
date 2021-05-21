@@ -1,0 +1,13 @@
+.details th, .details td{
+    font-size: larger;
+  padding: 5px;
+  width:25% ;
+}
+.detailsTable{
+    width:100%;
+    margin: auto;
+}
+
+
+
+

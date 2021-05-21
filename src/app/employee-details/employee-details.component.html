@@ -1,0 +1,117 @@
+
+
+<div class="details" style="display: flex;">
+  <div class="col-7" style="text-align: center;margin: auto;">
+  
+  
+<h1 style="text-align: center;">Employee Details Are</h1>
+<table class="table table-borderless detailsTable">
+    
+    <tbody style="text-align:left;">
+    <tr >
+        <th></th>
+      <th>Name</th>
+      <td>{{data.First_Name +" "+data.Last_Name}}</td>
+      <th></th>
+    </tr>
+    <tr >
+      <th></th>
+        <th>Date Of Birth</th>
+        <td>{{data.Date_of_Birth}}</td>
+        <th></th>
+      </tr>
+      <tr >
+        <th></th>
+        <th>Age</th>
+        <td>{{data.Age}}</td>
+        <th></th>
+      </tr>
+      <tr >
+        <th></th>
+        <th>Email</th>
+        <td>{{data.Email}}</td>
+        <th></th>
+      </tr>
+      <tr >
+        <th></th>
+        <th>Phone Number</th>
+        <td>{{data.Phone_No}}</td>
+        <th></th>
+      </tr>
+      <tr >
+        <th></th>
+        <th>Department</th>
+        <td>{{data.Department}}</td>
+        <th></th>
+      </tr>
+      <tr >
+        <th></th>
+        <th>Job Role</th>
+        <td>{{data.Job_Role}}</td>
+        <th></th>
+      </tr>
+     
+    </tbody>
+  </table>
+  </div>
+
+</div>
+  <!-- Address -->
+  <div>
+    <div class="col-10  details" style="margin: auto;"  *ngFor="let address of data.EmployeeAddresses">
+      <!-- <h1 style="text-align: center;">{{address.Address_type}} Address</h1> -->
+  <table class="table table-borderless detailsTable" >
+    <tbody style="text-align:left;">
+      <tr >
+        <th style="text-align: end;"><h3>{{address.Address_type}} Address</h3></th>
+        <th ></th>
+        <td></td>
+        
+      </tr>
+    <tr >
+        <th></th>
+        <th >House Number</th>
+        <td>{{address.House_number}}</td>
+        
+      </tr>
+      <tr >
+        <th></th>
+        <th>Street</th>
+        <td>{{address.Street}}</td>
+        
+      </tr>
+      <tr >
+        <th></th>
+        <th>City</th>
+        <td>{{address.City}}</td>
+        
+      </tr>
+      <tr >
+        <th></th>
+        <th>State</th>
+        <td>{{address.State}}</td>
+        
+      </tr>
+      <tr >
+        <th></th>
+        <th>Country</th>
+        <td>{{address.Country}}</td>
+        
+      </tr>
+      <tr >
+        <th></th>
+        <th>Pin Code</th>
+        <td>{{address.Pin_Code}}</td>
+        
+      </tr>
+      <tr >
+        <th></th>
+        <th>Landmark</th>
+        <td>{{address.Landmark}}</td>
+        
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
